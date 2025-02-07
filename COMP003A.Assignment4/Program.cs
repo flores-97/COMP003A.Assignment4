@@ -17,7 +17,22 @@ namespace COMP003A.Assignment4
             int choice;
             int done;
 
-           
+            List<string> productNames = new List<string>();//list of product names
+            List<int> productQuantities = new List<int>();//list of quantities
+         
+
+
+           int index = productNames.IndexOf("Apples");
+           if (index != -1)
+           {
+               productQuantities[index] = 50;
+           }
+           else
+           {
+               Console.WriteLine("Product not found!");
+           }
+
+
 
             while (true)
             {
@@ -35,17 +50,9 @@ namespace COMP003A.Assignment4
 
                 if (choice == 4) break;
 
-                
-
                 if (choice == 1)
                 {
-                    List<string> productNames = new List<string>();
-                    List<int> productQuantities = new List<int>();
-
-                    foreach (string name in productNames)
-                        {
-                            Console.WriteLine(name);
-                        }
+                    
                     Console.Write("\nEnter product name: ");
                     productNames.Add(Console.ReadLine());
                     Console.Write("Enter proudct quanity: ");
@@ -56,12 +63,20 @@ namespace COMP003A.Assignment4
                 
                 if (choice == 2)
                 {
-
+                    Console.Write("Enter product to remove: ");
+                    productNames.Remove(Console.ReadLine());
+                    Console.Write("How many? ");
+                    productQuantities.Remove(int.Parse(Console.ReadLine()));
+                    Console.WriteLine("Update successful!");
                 }
 
                 if (choice == 3)
                 {
-                 
+                    Console.WriteLine("Inventory Summary:");
+                    Console.WriteLine($"");
+                    Console.WriteLine($"Total product: {productNames.Count}");
+                    Console.WriteLine($"Total Quantity: {productQuantities.Count}");
+                    Console.WriteLine($"Average Quantity: \n");
                 }
             }
         }
