@@ -101,6 +101,8 @@ namespace COMP003A.Assignment4
 
                     Console.Write("\nEnter product to remove: ");
                     productNames.Remove(Console.ReadLine());
+                    Console.Write("Remove how many? ");
+                    productQuantities.Remove(int.Parse(Console.ReadLine()));
                     Console.WriteLine("Update successful!\n");
                 }
 
