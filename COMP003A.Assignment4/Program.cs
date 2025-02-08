@@ -4,6 +4,8 @@ Course: COMP-003A
 Faculty: Jonathon Cruz
 Purpose: Inventory management application with a minimum of 10 elements in the collection.
 */
+using System.ComponentModel.DataAnnotations;
+using System.Security.Cryptography.X509Certificates;
 using System.Xml.Serialization;
 
 namespace COMP003A.Assignment4
@@ -16,14 +18,12 @@ namespace COMP003A.Assignment4
             Console.WriteLine("Welcome to the Inventory Management System!");
 
 
-            
-           
+            int choice;
+            int done;
+                
+            List<string> productNames = new List<string>();//list of product names
+            List<int> productQuantities = new List<int>();//list of quantities
 
-                int choice;
-                int done;
-
-                List<string> productNames = new List<string>();//list of product names
-                List<int> productQuantities = new List<int>();//list of quantities
 
 
             while (true)
@@ -36,7 +36,7 @@ namespace COMP003A.Assignment4
 
                     Console.Write("Enter your choice: ");
 
-                    choice = int.Parse(Console.ReadLine());
+                     choice = int.Parse(Console.ReadLine());
 
 
 
@@ -44,21 +44,38 @@ namespace COMP003A.Assignment4
 
                 else if (choice == 1)
                 {
+                    
+                        Console.Write("\nEnter product name: ");
+                        productNames.Add(Console.ReadLine());
+                        
+                        Console.Write("Enter proudct quantity: ");
+                        productQuantities.Add(int.Parse(Console.ReadLine()));
+                        
 
-                    Console.Write("\nEnter product name: ");
-                    productNames.Add(Console.ReadLine());
-                    Console.Write("Enter proudct quantity: ");// needs error if quantity is negative then add to option 2 
-                    productQuantities.Add(int.Parse(Console.ReadLine()));
-
+                        Console.WriteLine("Product and Quantity successfully added!");
                 }
 
                 else if (choice == 2)
                 {
-                    Console.Write("Which item would you like to update? ");
-                    productNames.IndexOf("productNames").ToString(Console.ReadLine());//needs error message if item not found
-                    
-                    Console.Write("How many would you like to add? ");
-                    productQuantities.Add(int.Parse((string)Console.ReadLine()));
+                    while (true)
+                    {
+                        Console.Write("Which item would you like to update? ");
+                        int index = productNames.IndexOf(Console.ReadLine());
+                        if (index != -1)
+                        {
+                            Console.Write("How many would you like to add or subtract? (enter the minus sign if subtracting): ");
+                            productQuantities.Add(int.Parse((string)Console.ReadLine()));
+                            Console.WriteLine("Product updated!");
+                            break;
+                            
+                        }
+                        else
+                        {
+                            Console.WriteLine("Product not found! Select 'Option 3' on menu to review available products.");
+                            break;
+                        }
+                        
+                    } 
                 }
 
 
@@ -66,7 +83,7 @@ namespace COMP003A.Assignment4
                     {
                    
                         Console.WriteLine("\nInventory Summary:");
-                        Console.WriteLine($"{Display}");//needs to display item/quantity
+                    Console.WriteLine($"{DisplayInfo}");//needs to display item/quantity
                         Console.WriteLine($"Total product: {productNames.Count}");
                         Console.WriteLine($"Total Quantity: {productQuantities.Sum()}");
                         Console.WriteLine($"Average Quantity:  {productQuantities.Average()}\n");
@@ -76,30 +93,16 @@ namespace COMP003A.Assignment4
                     {
                         Console.WriteLine("\nInvalid entry. Select an option on the menu.\n");
                     }
-                }
+            }
             
         }
-        public static void Display(string productNames, int productQuantities)
+        public static void DisplayInfo(string productNames, int productQuantities)
 
         {
-            Console.WriteLine($"- {productNames}: ");
-        }
-
-        public static void Namesearch(string productNames, int productQuantities)
-
-        {
-
-            int index = productNames.IndexOf(productNames);
-            if (index != -1)
+            foreach (object name in productNames)
             {
-                productQuantities = 100;
+                Console.WriteLine(name);
             }
-            else
-            {
-                Console.WriteLine("Product not found!");
-            }
-
-           
         }
     }
 }
